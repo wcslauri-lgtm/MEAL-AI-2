@@ -1,0 +1,563 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		F1C408472E6246D200E6DA6C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1C408312E6246D000E6DA6C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F1C408382E6246D000E6DA6C;
+			remoteInfo = "MEAL AI";
+		};
+		F1C408512E6246D200E6DA6C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1C408312E6246D000E6DA6C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F1C408382E6246D000E6DA6C;
+			remoteInfo = "MEAL AI";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F1C408392E6246D000E6DA6C /* MEAL AI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MEAL AI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1C408462E6246D200E6DA6C /* MEAL AITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MEAL AITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1C408502E6246D200E6DA6C /* MEAL AIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MEAL AIUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		F1C4083B2E6246D000E6DA6C /* MEAL AI */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "MEAL AI";
+			sourceTree = "<group>";
+		};
+		F1C408492E6246D200E6DA6C /* MEAL AITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "MEAL AITests";
+			sourceTree = "<group>";
+		};
+		F1C408532E6246D200E6DA6C /* MEAL AIUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "MEAL AIUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F1C408362E6246D000E6DA6C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1C408432E6246D200E6DA6C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1C4084D2E6246D200E6DA6C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F1C408302E6246D000E6DA6C = {
+			isa = PBXGroup;
+			children = (
+				F1C4083B2E6246D000E6DA6C /* MEAL AI */,
+				F1C408492E6246D200E6DA6C /* MEAL AITests */,
+				F1C408532E6246D200E6DA6C /* MEAL AIUITests */,
+				F1C4083A2E6246D000E6DA6C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F1C4083A2E6246D000E6DA6C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F1C408392E6246D000E6DA6C /* MEAL AI.app */,
+				F1C408462E6246D200E6DA6C /* MEAL AITests.xctest */,
+				F1C408502E6246D200E6DA6C /* MEAL AIUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F1C408382E6246D000E6DA6C /* MEAL AI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F1C4085A2E6246D200E6DA6C /* Build configuration list for PBXNativeTarget "MEAL AI" */;
+			buildPhases = (
+				F1C408352E6246D000E6DA6C /* Sources */,
+				F1C408362E6246D000E6DA6C /* Frameworks */,
+				F1C408372E6246D000E6DA6C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				F1C4083B2E6246D000E6DA6C /* MEAL AI */,
+			);
+			name = "MEAL AI";
+			packageProductDependencies = (
+			);
+			productName = "MEAL AI";
+			productReference = F1C408392E6246D000E6DA6C /* MEAL AI.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F1C408452E6246D200E6DA6C /* MEAL AITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F1C4085D2E6246D200E6DA6C /* Build configuration list for PBXNativeTarget "MEAL AITests" */;
+			buildPhases = (
+				F1C408422E6246D200E6DA6C /* Sources */,
+				F1C408432E6246D200E6DA6C /* Frameworks */,
+				F1C408442E6246D200E6DA6C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F1C408482E6246D200E6DA6C /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				F1C408492E6246D200E6DA6C /* MEAL AITests */,
+			);
+			name = "MEAL AITests";
+			packageProductDependencies = (
+			);
+			productName = "MEAL AITests";
+			productReference = F1C408462E6246D200E6DA6C /* MEAL AITests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F1C4084F2E6246D200E6DA6C /* MEAL AIUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F1C408602E6246D200E6DA6C /* Build configuration list for PBXNativeTarget "MEAL AIUITests" */;
+			buildPhases = (
+				F1C4084C2E6246D200E6DA6C /* Sources */,
+				F1C4084D2E6246D200E6DA6C /* Frameworks */,
+				F1C4084E2E6246D200E6DA6C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F1C408522E6246D200E6DA6C /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				F1C408532E6246D200E6DA6C /* MEAL AIUITests */,
+			);
+			name = "MEAL AIUITests";
+			packageProductDependencies = (
+			);
+			productName = "MEAL AIUITests";
+			productReference = F1C408502E6246D200E6DA6C /* MEAL AIUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F1C408312E6246D000E6DA6C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1640;
+				LastUpgradeCheck = 1640;
+				TargetAttributes = {
+					F1C408382E6246D000E6DA6C = {
+						CreatedOnToolsVersion = 16.4;
+					};
+					F1C408452E6246D200E6DA6C = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = F1C408382E6246D000E6DA6C;
+					};
+					F1C4084F2E6246D200E6DA6C = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = F1C408382E6246D000E6DA6C;
+					};
+				};
+			};
+			buildConfigurationList = F1C408342E6246D000E6DA6C /* Build configuration list for PBXProject "MEAL AI" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F1C408302E6246D000E6DA6C;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = F1C4083A2E6246D000E6DA6C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F1C408382E6246D000E6DA6C /* MEAL AI */,
+				F1C408452E6246D200E6DA6C /* MEAL AITests */,
+				F1C4084F2E6246D200E6DA6C /* MEAL AIUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F1C408372E6246D000E6DA6C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1C408442E6246D200E6DA6C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1C4084E2E6246D200E6DA6C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F1C408352E6246D000E6DA6C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1C408422E6246D200E6DA6C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1C4084C2E6246D200E6DA6C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F1C408482E6246D200E6DA6C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F1C408382E6246D000E6DA6C /* MEAL AI */;
+			targetProxy = F1C408472E6246D200E6DA6C /* PBXContainerItemProxy */;
+		};
+		F1C408522E6246D200E6DA6C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F1C408382E6246D000E6DA6C /* MEAL AI */;
+			targetProxy = F1C408512E6246D200E6DA6C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		F1C408582E6246D200E6DA6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = V2P3XJ8233;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F1C408592E6246D200E6DA6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = V2P3XJ8233;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F1C4085B2E6246D200E6DA6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = V2P3XJ8233;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "lajtinen.MEAL-AI";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F1C4085C2E6246D200E6DA6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = V2P3XJ8233;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "lajtinen.MEAL-AI";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F1C4085E2E6246D200E6DA6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = V2P3XJ8233;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "lajtinen.MEAL-AITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MEAL AI.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MEAL AI";
+			};
+			name = Debug;
+		};
+		F1C4085F2E6246D200E6DA6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = V2P3XJ8233;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "lajtinen.MEAL-AITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MEAL AI.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MEAL AI";
+			};
+			name = Release;
+		};
+		F1C408612E6246D200E6DA6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = V2P3XJ8233;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "lajtinen.MEAL-AIUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "MEAL AI";
+			};
+			name = Debug;
+		};
+		F1C408622E6246D200E6DA6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = V2P3XJ8233;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "lajtinen.MEAL-AIUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "MEAL AI";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F1C408342E6246D000E6DA6C /* Build configuration list for PBXProject "MEAL AI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1C408582E6246D200E6DA6C /* Debug */,
+				F1C408592E6246D200E6DA6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F1C4085A2E6246D200E6DA6C /* Build configuration list for PBXNativeTarget "MEAL AI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1C4085B2E6246D200E6DA6C /* Debug */,
+				F1C4085C2E6246D200E6DA6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F1C4085D2E6246D200E6DA6C /* Build configuration list for PBXNativeTarget "MEAL AITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1C4085E2E6246D200E6DA6C /* Debug */,
+				F1C4085F2E6246D200E6DA6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F1C408602E6246D200E6DA6C /* Build configuration list for PBXNativeTarget "MEAL AIUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1C408612E6246D200E6DA6C /* Debug */,
+				F1C408622E6246D200E6DA6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F1C408312E6246D000E6DA6C /* Project object */;
+}

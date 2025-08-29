@@ -400,6 +400,9 @@
 				DEVELOPMENT_TEAM = V2P3XJ8233;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "MEAL AI käyttää kameraa aterioiden kuvaamiseen analyysiä varten.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "MEAL AI käyttää mikrofonia äänihakuun.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "MEAL AI käyttää puheentunnistusta muuntaakseen puheen tekstiksi hakua varten.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -428,6 +431,9 @@
 				DEVELOPMENT_TEAM = V2P3XJ8233;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "MEAL AI käyttää kameraa aterioiden kuvaamiseen analyysiä varten.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "MEAL AI käyttää mikrofonia äänihakuun.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "MEAL AI käyttää puheentunnistusta muuntaakseen puheen tekstiksi hakua varten.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

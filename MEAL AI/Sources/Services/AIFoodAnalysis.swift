@@ -14,7 +14,7 @@ final class OpenAIProviderService: AIProviderService {
             throw NSError(domain: "OpenAI", code: -10, userInfo: [NSLocalizedDescriptionKey: "OpenAI key missing"])
         }
         let api = OpenAIAPI(apiKey: key)
-        let sys = "You are a nutrition assistant. Reply strictly as JSON with keys: mealName, carbohydrates, protein, fat."
+        let sys = "You are a nutrition assistant. Reply strictly as JSON with keys: mealName, mealDescription, calories, carbohydrates, protein, fat, fiber, portionDescription, diabetesNotes."
         let raw = try await api.sendChat(model: .gpt4oMini, systemPrompt: sys, userPrompt: prompt,
                                          imageData: imageData, temperature: 0.0, maxCompletionTokens: 600, forceJSON: true)
         let cleaned = JSONTools.sanitizeJSON(raw)
@@ -40,8 +40,8 @@ final class AIFoodAnalysis {
     func analyze(baseInfo: FoodBaseInfo?, query: String) async throws -> AIFoodAnalysisResult {
         var prompt = """
         Food query: \(query)
-        Return nutrition (grams) for the consumed portion.
-        JSON keys: mealName, carbohydrates, protein, fat.
+        Return nutrition (grams) for the consumed portion and additional context.
+        JSON keys: mealName, mealDescription, calories, carbohydrates, protein, fat, fiber, portionDescription, diabetesNotes.
         """
         if let b = baseInfo {
             prompt += "\nBase: name=\(b.name), carbs=\(b.carbs ?? -1), protein=\(b.protein ?? -1), fat=\(b.fat ?? -1)."
@@ -51,8 +51,8 @@ final class AIFoodAnalysis {
 
     func analyze(imageData: Data) async throws -> AIFoodAnalysisResult {
         let prompt = """
-        Inspect the photo and estimate macronutrients (g) for the pictured portion.
-        Output strict JSON: mealName, carbohydrates, protein, fat.
+        Inspect the photo and estimate macronutrients (g) and other context for the pictured portion.
+        Output strict JSON: mealName, mealDescription, calories, carbohydrates, protein, fat, fiber, portionDescription, diabetesNotes.
         """
         return try await provider.analyze(prompt: prompt, imageData: imageData)
     }

@@ -13,6 +13,7 @@ struct SearchView: View {
     @ObservedObject private var favs = FavoritesStore.shared
 
     var body: some View {
+        ZStack {
         VStack(spacing: 12) {
             HStack {
                 TextField("Hae ruokaa nimellä…", text: $query, onCommit: runTextSearch)
@@ -35,7 +36,6 @@ struct SearchView: View {
             }
             .padding(.horizontal)
 
-            if isLoading { ProgressView().padding() }
             if let e = errorMessage { Text(e).foregroundColor(.red).padding(.horizontal) }
 
             if !favs.items.isEmpty {
@@ -72,6 +72,11 @@ struct SearchView: View {
         }
         .sheet(item: $result) { r in ResultView(result: r) }
         .onDisappear { stopVoice() }
+
+        if isLoading {
+            AnalysisOverlayView(onCancel: { isLoading = false })
+        }
+        }
     }
 
     private func runTextSearch() { Task { await run(.text(query)) } }

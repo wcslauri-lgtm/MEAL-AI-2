@@ -19,3 +19,4 @@ Itsenäinen SwiftUI-sovellus nimellä **MEAL AI**. Ominaisuudet:
 ## Huom.
 - Claude/Gemini on jätetty placeholderiksi – voit lisätä provider-luokat samalla rajapinnalla.
 - Kuvien lähetys tehdään base64-data-urlina OpenAI chat completions -päätepisteelle.
+- App Group (`group.lajtinen.MEAL-AI`) on valmiina tulevia integraatioita varten.

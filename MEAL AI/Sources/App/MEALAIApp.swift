@@ -3,8 +3,9 @@ import SwiftUI
 
 @main
 struct MEALAIApp: App {
+    @AppStorage("appLanguage") private var appLanguage: String = "FI"
     @State private var showShortcutAlert = false
-    @State private var shortcutMessage = ""
+    @State private var shortcutMessageKey = ""
 
     var body: some Scene {
         WindowGroup {
@@ -13,19 +14,20 @@ struct MEALAIApp: App {
                     guard url.scheme == "mealai" else { return }
                     switch url.host {
                     case "done":
-                        shortcutMessage = "Ravintoarvojen siirto onnistui"
+                        shortcutMessageKey = "app.shortcut.success"
                         showShortcutAlert = true
                     case "error":
-                        shortcutMessage = "Shortcuttin suoritus epäonnistui"
+                        shortcutMessageKey = "app.shortcut.error"
                         showShortcutAlert = true
                     default:
                         break
                     }
                 }
-                .alert(shortcutMessage, isPresented: $showShortcutAlert) {
-                    Button("OK", role: .cancel) { }
+                .alert(LocalizedStringKey(shortcutMessageKey), isPresented: $showShortcutAlert) {
+                    Button(LocalizedStringKey("app.shortcut.ok"), role: .cancel) { }
                 }
                 .environmentObject(HistoryStore.shared)
+                .environment(\.locale, Locale(identifier: appLanguage.lowercased()))
         }
     }
 }

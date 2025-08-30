@@ -1,0 +1,14 @@
+"home.title" = "MEAL-AI";
+"home.action.identify" = "Identify";
+"home.action.history" = "History";
+"home.action.favorites" = "Favorites";
+"home.dialog.selectSource" = "Select Source";
+"home.dialog.camera" = "Camera";
+"home.dialog.photoLibrary" = "Photo Library";
+"home.dialog.cancel" = "Cancel";
+"home.error.foodSearchDisabled" = "Food Search is not enabled (Settings → Food Search).";
+"home.search.placeholder" = "Search food";
+"home.fab.accessibility" = "Select or capture images";
+"app.shortcut.success" = "Nutrient transfer succeeded";
+"app.shortcut.error" = "Shortcut execution failed";
+"app.shortcut.ok" = "OK";

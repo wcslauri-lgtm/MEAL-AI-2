@@ -9,7 +9,7 @@ struct HomeView: View {
     @State private var showSourceOptions = false
     @State private var showBarcode = false
     @State private var isLoading = false
-    @State private var errorMessage: String?
+    @State private var errorMessageKey: String?
     @State private var result: StageMealResult?
     @State private var currentImage: UIImage?
     @State private var currentImages: [UIImage] = []
@@ -26,7 +26,7 @@ struct HomeView: View {
                 DSColor.background.ignoresSafeArea()
 
                 VStack(alignment: .leading, spacing: DS.Spacing.xl.rawValue) {
-                    Text("MEAL-AI")
+                    Text("home.title")
                         .font(DSTypography.largeTitle)
                         .foregroundStyle(DSColor.textPrimary)
 
@@ -35,19 +35,19 @@ struct HomeView: View {
                     }
 
                     HStack(spacing: DS.Spacing.lg.rawValue) {
-                        QuickActionCard(title: "Identify", systemImage: "camera.viewfinder") {
+                        QuickActionCard(titleKey: "home.action.identify", systemImage: "camera.viewfinder") {
                             showSourceOptions = true
                         }
-                        QuickActionCard(title: "History", systemImage: "list.bullet.rectangle") {
+                        QuickActionCard(titleKey: "home.action.history", systemImage: "list.bullet.rectangle") {
                             path.append(.history)
                         }
-                        QuickActionCard(title: "Favorites", systemImage: "star.fill") {
+                        QuickActionCard(titleKey: "home.action.favorites", systemImage: "star.fill") {
                             path.append(.favorites)
                         }
                     }
 
-                    if let e = errorMessage {
-                        Text(e)
+                    if let e = errorMessageKey {
+                        Text(LocalizedStringKey(e))
                             .font(DSTypography.caption)
                             .foregroundStyle(DSColor.error)
                     }
@@ -97,10 +97,10 @@ struct HomeView: View {
             .sheet(item: $result) { r in
                 ResultView(result: r, image: currentImage)
             }
-            .confirmationDialog("Select Source", isPresented: $showSourceOptions) {
-                Button("Camera") { showCamera = true }
-                Button("Photo Library") { showImagePicker = true }
-                Button("Cancel", role: .cancel) { }
+            .confirmationDialog("home.dialog.selectSource", isPresented: $showSourceOptions) {
+                Button(LocalizedStringKey("home.dialog.camera")) { showCamera = true }
+                Button(LocalizedStringKey("home.dialog.photoLibrary")) { showImagePicker = true }
+                Button(LocalizedStringKey("home.dialog.cancel"), role: .cancel) { }
             }
             .navigationDestination(for: Destination.self) { dest in
                 switch dest {
@@ -124,17 +124,17 @@ struct HomeView: View {
     @MainActor
     private func run(_ input: FoodSearchRouter.Input) async {
         guard UserDefaults.standard.foodSearchEnabled else {
-            self.errorMessage = "Food Search ei ole päällä (Asetukset → Food Search)."
+                    self.errorMessageKey = "home.error.foodSearchDisabled"
             return
         }
-        errorMessage = nil
+        errorMessageKey = nil
         isLoading = true
         defer { isLoading = false }
         do {
             let stage = try await FoodSearchRouter.shared.run(input)
             self.result = stage
         } catch {
-            self.errorMessage = error.localizedDescription
+            self.errorMessageKey = error.localizedDescription
         }
     }
 }
@@ -147,7 +147,7 @@ struct SearchBar: View {
         HStack(spacing: DS.Spacing.sm.rawValue) {
             Image(systemName: "magnifyingglass")
                 .foregroundStyle(DSColor.textPrimary)
-            TextField("Search food", text: $text, onCommit: onSubmit)
+            TextField(LocalizedStringKey("home.search.placeholder"), text: $text, onCommit: onSubmit)
                 .textInputAutocapitalization(.never)
                 .disableAutocorrection(true)
                 .foregroundStyle(DSColor.textPrimary)
@@ -159,12 +159,12 @@ struct SearchBar: View {
         .overlay(
             RoundedRectangle(cornerRadius: DS.Radius.pill.rawValue).stroke(DSColor.stroke)
         )
-        .accessibilityLabel("Search food")
+        .accessibilityLabel(Text("home.search.placeholder"))
     }
 }
 
 struct QuickActionCard: View {
-    let title: String
+    let titleKey: LocalizedStringKey
     let systemImage: String
     let action: () -> Void
 
@@ -174,7 +174,7 @@ struct QuickActionCard: View {
                 Image(systemName: systemImage)
                     .font(.system(size: 24, weight: .semibold))
                     .foregroundStyle(Palette.deepForestGreen)
-                Text(title)
+                Text(titleKey)
                     .font(DSTypography.body.weight(.semibold))
                     .foregroundStyle(DSColor.textPrimary)
             }
@@ -185,7 +185,7 @@ struct QuickActionCard: View {
         }
         .buttonStyle(.plain)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(Text(title))
+        .accessibilityLabel(Text(titleKey))
     }
 }
 
@@ -201,7 +201,7 @@ struct FabButton: View {
                 .clipShape(Circle())
                 .shadow(DS.Elevation.fab)
         }
-        .accessibilityLabel("Select or capture images")
+        .accessibilityLabel(Text("home.fab.accessibility"))
     }
 }
 

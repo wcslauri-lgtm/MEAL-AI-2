@@ -27,8 +27,14 @@ struct ResultView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text(result.mealName ?? "Tulos").font(.title2.bold())
-            if let desc = result.mealDescription { Text(desc).font(.subheadline) }
+            Text(result.mealName ?? "Tulos")
+                .font(.title2.bold())
+                .foregroundStyle(DSColor.textPrimary)
+            if let desc = result.mealDescription {
+                Text(desc)
+                    .font(.subheadline)
+                    .foregroundStyle(DSColor.textSecondary)
+            }
 
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12) {
@@ -52,20 +58,26 @@ struct ResultView: View {
 
             if let portion = result.portionDescription {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Portions & Servings").font(.headline)
+                    Text("Portions & Servings")
+                        .font(.headline)
+                        .foregroundStyle(DSColor.textPrimary)
                     Text(portion)
+                        .foregroundStyle(DSColor.textSecondary)
                 }
                 .padding()
-                .background(Color(.secondarySystemBackground))
+                .background(DSColor.surface)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
             }
             if let notes = result.diabetesNotes {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Diabetes Notes").font(.headline)
+                    Text("Diabetes Notes")
+                        .font(.headline)
+                        .foregroundStyle(DSColor.textPrimary)
                     Text(notes)
+                        .foregroundStyle(DSColor.textSecondary)
                 }
                 .padding()
-                .background(Color(.secondarySystemBackground))
+                .background(DSColor.surface)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
             }
 
@@ -100,6 +112,7 @@ struct ResultView: View {
             Spacer()
         }
         .padding()
+        .background(DSColor.background.ignoresSafeArea())
         .navigationTitle("Tulos")
         .alert("Ateria tallennettu", isPresented: $showingHistoryAlert) {
             Button("OK", role: .cancel) {}
@@ -137,26 +150,34 @@ struct ResultView: View {
 
     private func macroEditor(_ title: String, _ value: Binding<Int>) -> some View {
         VStack {
-            Text(title).font(.headline)
+            Text(title)
+                .font(.headline)
+                .foregroundStyle(DSColor.textPrimary)
             HStack {
                 AdjustButton(delta: -1, value: value)
-                Text("\(value.wrappedValue) g").font(.title3.monospacedDigit())
+                Text("\(value.wrappedValue) g")
+                    .font(.title3.monospacedDigit())
+                    .foregroundStyle(DSColor.textPrimary)
                 AdjustButton(delta: 1, value: value)
             }
         }
         .frame(maxWidth: .infinity)
         .padding()
-        .background(Color(.secondarySystemBackground))
+        .background(DSColor.surface)
         .clipShape(RoundedRectangle(cornerRadius: 12))
     }
 
     private func macroPill(title: String, value: Int, unit: String) -> some View {
         VStack {
-            Text("\(value) \(unit)").font(.headline)
-            Text(title).font(.caption2)
+            Text("\(value) \(unit)")
+                .font(.headline)
+                .foregroundStyle(DSColor.textPrimary)
+            Text(title)
+                .font(.caption2)
+                .foregroundStyle(DSColor.textSecondary)
         }
         .padding(8)
-        .background(Color(.secondarySystemBackground))
+        .background(DSColor.surface)
         .clipShape(RoundedRectangle(cornerRadius: 8))
     }
 }

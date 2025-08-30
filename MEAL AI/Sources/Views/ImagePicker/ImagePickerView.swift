@@ -44,7 +44,7 @@ struct ImagePickerView: View {
                     }
                 }
             }
-            .onChange(of: selectedItems) { newItems in
+            .onChange(of: selectedItems) { _, newItems in
                 Task { await loadImages(from: newItems) }
             }
         }

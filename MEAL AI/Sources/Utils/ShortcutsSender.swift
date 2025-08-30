@@ -8,8 +8,8 @@ enum ShortcutsSender {
 
         let defaults = UserDefaults.standard
         let name = defaults.shortcutName.trimmingCharacters(in: .whitespacesAndNewlines)
-        let sendJSON = defaults.shortcutSendJSON
-        guard !name.isEmpty else { return }
+        let enabled = defaults.shortcutEnabled
+        guard !name.isEmpty, enabled else { return }
 
         var comps = URLComponents()
         comps.scheme = "shortcuts"
@@ -24,18 +24,11 @@ enum ShortcutsSender {
 
         // IMPORTANT: For Shortcuts URL scheme, you must provide BOTH:
         // input=text  and  text=<payload>
-        if sendJSON {
-            let payload: [String: Any] = ["carbs": c, "fat": f, "protein": p]
-            if let data = try? JSONSerialization.data(withJSONObject: payload),
-               let json = String(data: data, encoding: .utf8) {
-                items.append(.init(name: "input", value: "text"))
-                items.append(.init(name: "text", value: json))
-            }
-        } else {
-            // Plain text fallback
-            let txt = "carbs=\(c);fat=\(f);protein=\(p)"
+        let payload: [String: Any] = ["carbs": c, "fat": f, "protein": p]
+        if let data = try? JSONSerialization.data(withJSONObject: payload),
+           let json = String(data: data, encoding: .utf8) {
             items.append(.init(name: "input", value: "text"))
-            items.append(.init(name: "text", value: txt))
+            items.append(.init(name: "text", value: json))
         }
 
         comps.queryItems = items

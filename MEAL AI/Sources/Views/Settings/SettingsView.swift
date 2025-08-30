@@ -14,7 +14,7 @@ struct SettingsView: View {
     @State private var usda: String = UserDefaults.standard.usdaApiKey ?? ""
 
     @AppStorage("shortcutName") private var shortcutName: String = ""
-    @AppStorage("shortcutSendJSON") private var shortcutSendJSON: Bool = true
+    @AppStorage("shortcutEnabled") private var shortcutEnabled: Bool = true
 
     @State private var testing = false
     @State private var testResult: String?
@@ -60,7 +60,7 @@ struct SettingsView: View {
 
             Section {
                 TextField("Shortcuttin nimi", text: $shortcutName)
-                Toggle("Lähetä makrot JSON-inputina", isOn: $shortcutSendJSON)
+                Toggle("Lähetä tiedot Shortcutille", isOn: $shortcutEnabled)
                 Text("Sovellus välittää Shortcutille JSON-objektin: { \"carbs\": 00, \"fat\": 00, \"protein\": 00 }.")
                     .font(.footnote).foregroundColor(.secondary)
             } header: { Text("Shortcuts") }

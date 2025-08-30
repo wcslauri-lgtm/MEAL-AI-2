@@ -48,9 +48,10 @@ extension UserDefaults {
         set { set(newValue, forKey: "shortcutName") }
     }
 
-    var shortcutSendJSON: Bool {
-        get { bool(forKey: "shortcutSendJSON") }
-        set { set(newValue, forKey: "shortcutSendJSON") }
+    /// Controls whether the app should send data to a Shortcut.
+    var shortcutEnabled: Bool {
+        get { bool(forKey: "shortcutEnabled") }
+        set { set(newValue, forKey: "shortcutEnabled") }
     }
 
     var appLanguage: String {

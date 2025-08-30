@@ -2,7 +2,7 @@ import Testing
 @testable import MEAL_AI
 
 struct HistoryStoreTests {
-    @Test func addAndRemoveEntry() async throws {
+    @MainActor @Test func addAndRemoveEntry() async throws {
         let store = HistoryStore.shared
         let initial = store.items.count
         let entry = HistoryEntry(name: "Test", calories: 1, protein: 1, carbs: 1, fat: 1, date: Date(), thumbnailData: Data())

@@ -11,6 +11,7 @@ struct HistoryEntry: Identifiable, Codable {
     var thumbnailData: Data
 }
 
+@MainActor
 final class HistoryStore: ObservableObject {
     static let shared = HistoryStore()
     @Published private(set) var items: [HistoryEntry] = []

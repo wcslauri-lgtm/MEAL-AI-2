@@ -8,6 +8,7 @@ struct FavoriteEntry: Identifiable, Codable {
     var createdAt: Date
 }
 
+@MainActor
 final class FavoritesStore: ObservableObject {
     static let shared = FavoritesStore()
     @Published private(set) var items: [FavoriteEntry] = []

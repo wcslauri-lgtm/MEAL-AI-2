@@ -205,11 +205,11 @@ struct TabBarWithFab: View {
                     HStack {
                         IconButton("barcode.viewfinder", action: onBarcode)
                         IconButton("star", action: onFavorites)
-                        Spacer().frame(width: 72)
+                        Spacer().frame(width: 96)
                         IconButton("list.bullet.rectangle", action: onHistory)
                         IconButton("gearshape", action: onSettings)
                     }
-                    .padding(.horizontal, DS.Spacing.xl.rawValue)
+                    .padding(.horizontal, DS.Spacing.lg.rawValue)
                 )
             FabButton(action: onCamera)
                 .offset(y: -28)

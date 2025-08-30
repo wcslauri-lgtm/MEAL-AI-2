@@ -7,6 +7,7 @@ struct CameraView: View {
     @State private var pickerItems: [PhotosPickerItem] = []
     @State private var previews: [UIImage] = []
     @State private var showCamera = false
+    private let maxPhotos = 3
 
     var body: some View {
         NavigationStack {
@@ -14,7 +15,7 @@ struct CameraView: View {
                 HStack {
                     PhotosPicker(
                         selection: $pickerItems,
-                        maxSelectionCount: 3 - previews.count,
+                        maxSelectionCount: maxPhotos - previews.count,
                         matching: .images
                     ) {
                         VStack {
@@ -24,7 +25,7 @@ struct CameraView: View {
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
-                    .disabled(previews.count >= 3)
+                    .disabled(previews.count >= maxPhotos)
                     .onChange(of: pickerItems) { newItems in
                         Task {
                             for item in newItems {
@@ -47,7 +48,7 @@ struct CameraView: View {
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
-                    .disabled(previews.count >= 3)
+                    .disabled(previews.count >= maxPhotos)
                     .sheet(isPresented: $showCamera) {
                         ImagePicker(sourceType: .camera) { image in
                             if let image = image {
@@ -59,7 +60,7 @@ struct CameraView: View {
                 .frame(height: 120)
 
                 HStack {
-                    ForEach(0..<3, id: \.self) { idx in
+                    ForEach(0..<maxPhotos, id: \.self) { idx in
                         if idx < previews.count {
                             Image(uiImage: previews[idx])
                                 .resizable()

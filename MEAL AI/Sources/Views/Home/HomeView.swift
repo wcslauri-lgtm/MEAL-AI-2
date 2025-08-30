@@ -5,8 +5,6 @@ struct HomeView: View {
     @State private var path: [Destination] = []
     @State private var query = ""
     @State private var showCamera = false
-    @State private var showImagePicker = false
-    @State private var showSourceOptions = false
     @State private var showBarcode = false
     @State private var isLoading = false
     @State private var errorMessageKey: String?
@@ -36,7 +34,7 @@ struct HomeView: View {
 
                     HStack(spacing: DS.Spacing.lg.rawValue) {
                         QuickActionCard(titleKey: "home.action.identify", systemImage: "camera.viewfinder") {
-                            showSourceOptions = true
+                            showCamera = true
                         }
                         QuickActionCard(titleKey: "home.action.history", systemImage: "list.bullet.rectangle") {
                             path.append(.history)
@@ -60,7 +58,7 @@ struct HomeView: View {
                 TabBarWithFab(
                     onBarcode: { showBarcode = true },
                     onFavorites: { path.append(.favorites) },
-                    onCamera: { showSourceOptions = true },
+                    onCamera: { showCamera = true },
                     onHistory: { path.append(.history) },
                     onSettings: { path.append(.settings) }
                 )
@@ -79,14 +77,6 @@ struct HomeView: View {
                     showCamera = false
                 })
             }
-            .sheet(isPresented: $showImagePicker) {
-                ImagePickerView(onImagesPicked: { datas in
-                    showImagePicker = false
-                    currentImages = datas.compactMap { UIImage(data: $0) }
-                    currentImage = currentImages.first
-                    Task { await run(.images(datas)) }
-                })
-            }
             .sheet(isPresented: $showBarcode) {
                 BarcodeScanView { code in
                     showBarcode = false
@@ -96,11 +86,6 @@ struct HomeView: View {
             }
             .sheet(item: $result) { r in
                 ResultView(result: r, image: currentImage)
-            }
-            .confirmationDialog("home.dialog.selectSource", isPresented: $showSourceOptions) {
-                Button(LocalizedStringKey("home.dialog.camera")) { showCamera = true }
-                Button(LocalizedStringKey("home.dialog.photoLibrary")) { showImagePicker = true }
-                Button(LocalizedStringKey("home.dialog.cancel"), role: .cancel) { }
             }
             .navigationDestination(for: Destination.self) { dest in
                 switch dest {

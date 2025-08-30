@@ -4,7 +4,7 @@ import UIKit
 struct HomeView: View {
     @State private var path: [Destination] = []
     @State private var query = ""
-    @State private var showCamera = false
+    @State private var showImagePicker = false
     @State private var showBarcode = false
     @State private var isLoading = false
     @State private var errorMessage: String?
@@ -34,7 +34,7 @@ struct HomeView: View {
 
                     HStack(spacing: DS.Spacing.lg.rawValue) {
                         QuickActionCard(title: "Identify", systemImage: "camera.viewfinder") {
-                            showCamera = true
+                            showImagePicker = true
                         }
                         QuickActionCard(title: "History", systemImage: "list.bullet.rectangle") {
                             path.append(.history)
@@ -58,7 +58,7 @@ struct HomeView: View {
                 TabBarWithFab(
                     onBarcode: { showBarcode = true },
                     onFavorites: { path.append(.favorites) },
-                    onCamera: { showCamera = true },
+                    onCamera: { showImagePicker = true },
                     onHistory: { path.append(.history) },
                     onSettings: { path.append(.settings) }
                 )
@@ -67,9 +67,9 @@ struct HomeView: View {
                     AnalysisOverlayView(onCancel: { isLoading = false })
                 }
             }
-            .sheet(isPresented: $showCamera) {
-                CameraView { datas in
-                    showCamera = false
+            .sheet(isPresented: $showImagePicker) {
+                ImagePickerView { datas in
+                    showImagePicker = false
                     currentImages = datas.compactMap { UIImage(data: $0) }
                     currentImage = currentImages.first
                     Task { await run(.images(datas)) }
@@ -184,7 +184,7 @@ struct FabButton: View {
                 .clipShape(Circle())
                 .shadow(DS.Elevation.fab)
         }
-        .accessibilityLabel("Capture with camera")
+        .accessibilityLabel("Select or capture images")
     }
 }
 

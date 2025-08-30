@@ -4,7 +4,6 @@ import SwiftUI
 struct SettingsView: View {
     @AppStorage("appLanguage") private var appLanguage: String = "FI"
     @AppStorage("foodSearchEnabled") private var foodSearchEnabled: Bool = true
-    @AppStorage("voiceSearchEnabled") private var voiceSearchEnabled: Bool = true
     @AppStorage("useVisionCamera") private var useVisionCamera: Bool = true
     @State private var provider: AIProvider = UserDefaults.standard.selectedAIProvider
 
@@ -23,7 +22,6 @@ struct SettingsView: View {
         Form {
             Section {
                 Toggle("Food Search käytössä", isOn: $foodSearchEnabled)
-                Toggle("Äänihaku", isOn: $voiceSearchEnabled).disabled(!foodSearchEnabled)
                 Toggle("Kamera-analyysi (AI Vision)", isOn: $useVisionCamera).disabled(!foodSearchEnabled)
 
                 Picker("AI-palvelu", selection: $provider) {

@@ -6,7 +6,6 @@ struct SearchView: View {
     @State private var query: String = ""
     @State private var showingScanner = false
     @State private var showingCamera = false
-    @State private var isListening = false
     @State private var isLoading = false
     @State private var errorMessage: String?
     @State private var result: StageMealResult?
@@ -21,11 +20,6 @@ struct SearchView: View {
             HStack {
                 TextField("Hae ruokaa nimellä…", text: $query, onCommit: runTextSearch)
                     .textFieldStyle(.roundedBorder)
-                Button { toggleVoice() } label: {
-                    Image(systemName: isListening ? "mic.circle.fill" : "mic.circle")
-                        .font(.title2)
-                }
-                .help("Äänihaku")
             }.padding(.horizontal)
 
             HStack {
@@ -81,7 +75,6 @@ struct SearchView: View {
             }
         }
         .sheet(item: $result) { r in ResultView(result: r, image: currentImage) }
-        .onDisappear { stopVoice() }
 
         if isLoading {
             AnalysisOverlayView(onCancel: { isLoading = false })
@@ -110,13 +103,5 @@ struct SearchView: View {
         }
     }
 
-    private func toggleVoice() { if isListening { stopVoice() } else { startVoice() } }
-    private func startVoice() {
-        isListening = true
-        Task {
-            try? await VoiceSearchService.shared.authorize()
-            try? VoiceSearchService.shared.start { text in self.query = text }
-        }
-    }
-    private func stopVoice() { isListening = false; VoiceSearchService.shared.stop() }
+    
 }

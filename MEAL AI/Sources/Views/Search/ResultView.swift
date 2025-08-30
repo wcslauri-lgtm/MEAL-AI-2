@@ -13,6 +13,7 @@ struct ResultView: View {
     @State private var fat: Int
     @State private var showingHistoryAlert = false
     @EnvironmentObject var historyStore: HistoryStore
+    @AppStorage("shortcutEnabled") private var shortcutEnabled: Bool = true
 
     init(result: StageMealResult, image: UIImage?) {
         self.result = result
@@ -69,7 +70,12 @@ struct ResultView: View {
             }
 
             HStack {
-                Button("Tallenna ateria") {
+                Button {
+                    favName = result.mealName ?? "Suosikki"; showFavSheet = true
+                } label: { Image(systemName: "star") }
+                .buttonStyle(.bordered)
+
+                Button {
                     let resized = image?.resized(to: CGSize(width: 100, height: 100))
                     let entry = HistoryEntry(
                         name: result.mealName ?? "Ateria",
@@ -82,17 +88,13 @@ struct ResultView: View {
                     )
                     historyStore.add(entry: entry)
                     showingHistoryAlert = true
+                    if shortcutEnabled {
+                        ShortcutsSender.sendToShortcuts(stage: editedResult)
+                    }
+                } label: {
+                    Label(shortcutEnabled ? "Lähetä ja tallenna ateria" : "Tallenna ateria",
+                          systemImage: shortcutEnabled ? "bolt" : "tray.and.arrow.down")
                 }
-                .buttonStyle(.bordered)
-
-                Button {
-                    favName = result.mealName ?? "Suosikki"; showFavSheet = true
-                } label: { Label("Lisää suosikkeihin", systemImage: "star") }
-                .buttonStyle(.bordered)
-
-                Button {
-                    ShortcutsSender.sendToShortcuts(stage: editedResult)
-                } label: { Label("Lähetä iAPS (Shortcut)", systemImage: "bolt") }
                 .buttonStyle(.borderedProminent)
             }
             Spacer()

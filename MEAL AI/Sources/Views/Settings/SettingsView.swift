@@ -61,6 +61,7 @@ struct SettingsView: View {
                 Toggle("Lähetä tiedot Shortcutille", isOn: $shortcutEnabled)
                 Text("Sovellus välittää Shortcutille JSON-objektin: { \"carbs\": 00, \"fat\": 00, \"protein\": 00 }.")
                     .font(.footnote).foregroundColor(.secondary)
+                Link("Hanki iAPS Shortcut", destination: URL(string: "https://www.icloud.com/shortcuts/46175787d9af4d0ebfc505f3d7129043")!)
             } header: { Text("Shortcuts") }
 
             Section {

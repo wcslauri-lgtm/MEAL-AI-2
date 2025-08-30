@@ -2,13 +2,11 @@
 "home.action.identify" = "Tunnista";
 "home.action.history" = "Historia";
 "home.action.favorites" = "Suosikit";
-"home.dialog.selectSource" = "Valitse lähde";
 "home.dialog.camera" = "Kamera";
-"home.dialog.photoLibrary" = "Kuvakirjasto";
 "home.dialog.cancel" = "Peruuta";
 "home.error.foodSearchDisabled" = "Food Search ei ole päällä (Asetukset → Food Search).";
 "home.search.placeholder" = "Etsi ruokaa";
-"home.fab.accessibility" = "Valitse tai kuvaa kuvia";
+"home.fab.accessibility" = "Ota kuvia";
 "app.shortcut.success" = "Ravintoarvojen siirto onnistui";
 "app.shortcut.error" = "Shortcuttin suoritus epäonnistui";
 "app.shortcut.ok" = "OK";

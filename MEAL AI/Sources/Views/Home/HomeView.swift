@@ -33,13 +33,13 @@ struct HomeView: View {
                     }
 
                     HStack(spacing: DS.Spacing.lg.rawValue) {
-                        QuickActionCard(title: "Identify", systemImage: "camera.viewfinder") {
+                        QuickActionCard(titleKey: "home.action.identify", systemImage: "camera.viewfinder") {
                             showCamera = true
                         }
-                        QuickActionCard(title: "History", systemImage: "list.bullet.rectangle") {
+                        QuickActionCard(titleKey: "home.action.history", systemImage: "list.bullet.rectangle") {
                             path.append(.history)
                         }
-                        QuickActionCard(title: "Favorites", systemImage: "star.fill") {
+                        QuickActionCard(titleKey: "home.action.favorites", systemImage: "star.fill") {
                             path.append(.favorites)
                         }
                     }
@@ -149,7 +149,7 @@ struct SearchBar: View {
 }
 
 struct QuickActionCard: View {
-    let title: String
+    let titleKey: LocalizedStringKey
     let systemImage: String
     let action: () -> Void
 
@@ -159,7 +159,7 @@ struct QuickActionCard: View {
                 Image(systemName: systemImage)
                     .font(.system(size: 24, weight: .semibold))
                     .foregroundStyle(Palette.deepForestGreen)
-                Text(title)
+                Text(titleKey)
                     .font(DSTypography.body.weight(.semibold))
                     .foregroundStyle(DSColor.textPrimary)
             }
@@ -170,7 +170,7 @@ struct QuickActionCard: View {
         }
         .buttonStyle(.plain)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(Text(title))
+        .accessibilityLabel(Text(titleKey))
     }
 }
 

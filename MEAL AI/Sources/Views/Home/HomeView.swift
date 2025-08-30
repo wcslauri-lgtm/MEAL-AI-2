@@ -68,11 +68,11 @@ struct HomeView: View {
                 }
             }
             .sheet(isPresented: $showCamera) {
-                CameraView { datas in
+                CameraView(angle: 0) { payloads in
                     showCamera = false
-                    currentImages = datas.compactMap { UIImage(data: $0) }
+                    currentImages = payloads.compactMap { UIImage(data: $0.data) }
                     currentImage = currentImages.first
-                    Task { await run(.images(datas)) }
+                    Task { await run(.images(payloads)) }
                 }
             }
             .sheet(isPresented: $showBarcode) {

@@ -2,7 +2,8 @@ import SwiftUI
 import UIKit
 
 struct CameraView: UIViewControllerRepresentable {
-    var onImagesPicked: ([Data]) -> Void
+    var angle: Double? = nil
+    var onImagesPicked: ([ImagePayload]) -> Void
     @Environment(\.dismiss) private var dismiss
 
     func makeCoordinator() -> Coordinator {
@@ -30,8 +31,8 @@ struct CameraView: UIViewControllerRepresentable {
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
             defer { parent.dismiss() }
             if let image = info[.originalImage] as? UIImage,
-               let data = image.jpegData(compressionQuality: 0.8) {
-                parent.onImagesPicked([data])
+               let processed = ImageProcessor.process(image, angle: parent.angle) {
+                parent.onImagesPicked([processed])
             }
         }
 

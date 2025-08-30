@@ -1,5 +1,6 @@
 
 import SwiftUI
+import UIKit
 
 struct SearchView: View {
     @State private var query: String = ""
@@ -9,6 +10,7 @@ struct SearchView: View {
     @State private var isLoading = false
     @State private var errorMessage: String?
     @State private var result: StageMealResult?
+    @State private var currentImage: UIImage?
 
     @ObservedObject private var favs = FavoritesStore.shared
 
@@ -29,7 +31,10 @@ struct SearchView: View {
                 Button { showingScanner = true } label: {
                     Label("Viivakoodi", systemImage: "barcode.viewfinder")
                 }.buttonStyle(.bordered)
-                Button { showingCamera = true } label: {
+                Button {
+                    showingCamera = true
+                    currentImage = nil
+                } label: {
                     Label("Kamera", systemImage: "camera")
                 }.buttonStyle(.bordered)
                 Spacer()
@@ -61,16 +66,18 @@ struct SearchView: View {
         .sheet(isPresented: $showingScanner) {
             BarcodeScanView { code in
                 showingScanner = false
+                currentImage = nil
                 Task { await run(.barcode(code)) }
             }
         }
         .sheet(isPresented: $showingCamera) {
             CameraView { data in
                 showingCamera = false
+                currentImage = UIImage(data: data)
                 Task { await run(.image(data)) }
             }
         }
-        .sheet(item: $result) { r in ResultView(result: r) }
+        .sheet(item: $result) { r in ResultView(result: r, image: currentImage) }
         .onDisappear { stopVoice() }
 
         if isLoading {
@@ -79,7 +86,10 @@ struct SearchView: View {
         }
     }
 
-    private func runTextSearch() { Task { await run(.text(query)) } }
+    private func runTextSearch() {
+        currentImage = nil
+        Task { await run(.text(query)) }
+    }
 
     private func run(_ input: FoodSearchRouter.Input) async {
         guard UserDefaults.standard.foodSearchEnabled else {

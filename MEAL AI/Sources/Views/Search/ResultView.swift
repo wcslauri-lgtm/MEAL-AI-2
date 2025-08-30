@@ -1,17 +1,22 @@
 
 import SwiftUI
 import Foundation
+import UIKit
 
 struct ResultView: View {
     let result: StageMealResult
+    let image: UIImage?
     @State private var favName: String
     @State private var showFavSheet: Bool
     @State private var carbs: Int
     @State private var protein: Int
     @State private var fat: Int
+    @State private var showingHistoryAlert = false
+    @EnvironmentObject var historyStore: HistoryStore
 
-    init(result: StageMealResult) {
+    init(result: StageMealResult, image: UIImage?) {
         self.result = result
+        self.image = image
         _favName = State(initialValue: "")
         _showFavSheet = State(initialValue: false)
         _carbs = State(initialValue: Int(result.analysis.carbs_g.rounded()))
@@ -64,6 +69,22 @@ struct ResultView: View {
             }
 
             HStack {
+                Button("Tallenna ateria") {
+                    let resized = image?.resized(to: CGSize(width: 100, height: 100))
+                    let entry = HistoryEntry(
+                        name: result.mealName ?? "Ateria",
+                        calories: editedResult.analysis.calories_kcal ?? 0,
+                        protein: editedResult.analysis.protein_g,
+                        carbs: editedResult.analysis.carbs_g,
+                        fat: editedResult.analysis.fat_g,
+                        date: Date(),
+                        thumbnailData: resized?.pngData() ?? Data()
+                    )
+                    historyStore.add(entry: entry)
+                    showingHistoryAlert = true
+                }
+                .buttonStyle(.bordered)
+
                 Button {
                     favName = result.mealName ?? "Suosikki"; showFavSheet = true
                 } label: { Label("Lisää suosikkeihin", systemImage: "star") }
@@ -78,6 +99,9 @@ struct ResultView: View {
         }
         .padding()
         .navigationTitle("Tulos")
+        .alert("Ateria tallennettu", isPresented: $showingHistoryAlert) {
+            Button("OK", role: .cancel) {}
+        }
         .sheet(isPresented: $showFavSheet) {
             NavigationStack {
                 Form { TextField("Suosikin nimi", text: $favName) }

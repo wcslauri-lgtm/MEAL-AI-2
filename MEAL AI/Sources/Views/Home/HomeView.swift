@@ -204,9 +204,11 @@ struct TabBarWithFab: View {
                 .overlay(
                     HStack {
                         IconButton("barcode.viewfinder", action: onBarcode)
+                        Spacer()
                         IconButton("star", action: onFavorites)
                         Spacer().frame(width: 96)
                         IconButton("list.bullet.rectangle", action: onHistory)
+                        Spacer()
                         IconButton("gearshape", action: onSettings)
                     }
                     .padding(.horizontal, DS.Spacing.lg.rawValue)

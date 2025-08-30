@@ -13,6 +13,8 @@ struct MEALAIApp: App {
                     .tabItem { Label("Haku", systemImage: "magnifyingglass") }
                 NavigationStack { FavoritesView() }
                     .tabItem { Label("Suosikit", systemImage: "star") }
+                NavigationStack { HistoryView() }
+                    .tabItem { Label("Historia", systemImage: "clock") }
                 NavigationStack { SettingsView() }
                     .tabItem { Label("Asetukset", systemImage: "gearshape") }
             }
@@ -32,6 +34,7 @@ struct MEALAIApp: App {
             .alert(shortcutMessage, isPresented: $showShortcutAlert) {
                 Button("OK", role: .cancel) { }
             }
+            .environmentObject(HistoryStore.shared)
         }
     }
 }

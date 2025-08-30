@@ -1,79 +1,42 @@
 import SwiftUI
-import PhotosUI
+import UIKit
 
-struct CameraView: View {
+struct CameraView: UIViewControllerRepresentable {
     var onImagesPicked: ([Data]) -> Void
     @Environment(\.dismiss) private var dismiss
-    @State private var items: [PhotosPickerItem] = []
-    @State private var previews: [UIImage] = []
 
-    var body: some View {
-        NavigationView {
-            VStack {
-                PhotosPicker(
-                    selection: $items,
-                    maxSelectionCount: 3,
-                    matching: .images
-                ) {
-                    VStack {
-                        Image(systemName: "camera")
-                            .font(.system(size: 60))
-                        Text("Take or select up to three photos")
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                }
-                .photosPickerStyle(.automatic)
-                .onChange(of: items) { newItems in
-                    Task {
-                        previews = []
-                        for item in newItems.prefix(3) {
-                            if let data = try? await item.loadTransferable(type: Data.self),
-                               let img = UIImage(data: data) {
-                                previews.append(img)
-                            }
-                        }
-                    }
-                }
+    func makeCoordinator() -> Coordinator {
+        Coordinator(parent: self)
+    }
 
-                HStack {
-                    ForEach(0..<3, id: \.self) { idx in
-                        if idx < previews.count {
-                            Image(uiImage: previews[idx])
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 60, height: 60)
-                                .clipped()
-                        } else {
-                            Rectangle()
-                                .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [4]))
-                                .frame(width: 60, height: 60)
-                        }
-                    }
-                }
-                .padding(.vertical, 8)
+    func makeUIViewController(context: Context) -> UIImagePickerController {
+        let picker = UIImagePickerController()
+        picker.sourceType = .camera
+        picker.delegate = context.coordinator
+        picker.allowsEditing = false
+        picker.mediaTypes = ["public.image"]
+        return picker
+    }
 
-                Button("Done") {
-                    Task {
-                        var datas: [Data] = []
-                        for item in items {
-                            if let data = try? await item.loadTransferable(type: Data.self) {
-                                datas.append(data)
-                            }
-                        }
-                        onImagesPicked(datas)
-                        dismiss()
-                    }
-                }
-                .disabled(items.isEmpty)
-                .padding(.bottom)
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
+
+    class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+        let parent: CameraView
+
+        init(parent: CameraView) {
+            self.parent = parent
+        }
+
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            defer { parent.dismiss() }
+            if let image = info[.originalImage] as? UIImage,
+               let data = image.jpegData(compressionQuality: 0.8) {
+                parent.onImagesPicked([data])
             }
-            .padding()
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") { dismiss() }
-                }
-            }
+        }
+
+        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+            parent.dismiss()
         }
     }
 }

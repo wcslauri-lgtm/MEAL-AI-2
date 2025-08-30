@@ -29,6 +29,7 @@ struct SettingsView: View {
                 }.pickerStyle(.segmented)
                  .disabled(!foodSearchEnabled)
             } header: { Text("Food Search") }
+            .listRowBackground(DSColor.surface)
 
             if foodSearchEnabled {
                 Section("API-avaimet") {
@@ -45,6 +46,7 @@ struct SettingsView: View {
                         .textInputAutocapitalization(.never)
                         .onChange(of: usda) { _, v in UserDefaults.standard.usdaApiKey = v }
                 }
+                .listRowBackground(DSColor.surface)
 
                 Section {
                     Button {
@@ -52,17 +54,19 @@ struct SettingsView: View {
                     } label: {
                         if testing { ProgressView() } else { Text("Testaa OpenAI-yhteys") }
                     }
-                    if let r = testResult { Text(r).font(.footnote).foregroundColor(.secondary) }
+                    if let r = testResult { Text(r).font(.footnote).foregroundStyle(DSColor.textSecondary) }
                 }
+                .listRowBackground(DSColor.surface)
             }
 
             Section {
                 TextField("Shortcuttin nimi", text: $shortcutName)
                 Toggle("Lähetä tiedot Shortcutille", isOn: $shortcutEnabled)
                 Text("Sovellus välittää Shortcutille JSON-objektin: { \"carbs\": 00, \"fat\": 00, \"protein\": 00 }.")
-                    .font(.footnote).foregroundColor(.secondary)
+                    .font(.footnote).foregroundStyle(DSColor.textSecondary)
                 Link("Hanki iAPS Shortcut", destination: URL(string: "https://www.icloud.com/shortcuts/46175787d9af4d0ebfc505f3d7129043")!)
             } header: { Text("Shortcuts") }
+            .listRowBackground(DSColor.surface)
 
             Section {
                 Picker("Kieli", selection: $appLanguage) {
@@ -70,7 +74,10 @@ struct SettingsView: View {
                     Text("English").tag("EN")
                 }.pickerStyle(.segmented)
             } header: { Text("Kieli") }
+            .listRowBackground(DSColor.surface)
         }
+        .scrollContentBackground(.hidden)
+        .background(DSColor.background.ignoresSafeArea())
         .navigationTitle("Asetukset")
         .onChange(of: provider) { _, v in UserDefaults.standard.selectedAIProvider = v }
     }

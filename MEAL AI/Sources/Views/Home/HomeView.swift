@@ -1,13 +1,18 @@
 import SwiftUI
+import UIKit
 
 struct HomeView: View {
     @State private var path: [Destination] = []
     @State private var query = ""
     @State private var showCamera = false
     @State private var showBarcode = false
+    @State private var isLoading = false
+    @State private var errorMessage: String?
+    @State private var result: StageMealResult?
+    @State private var currentImage: UIImage?
+    @State private var currentImages: [UIImage] = []
 
     private enum Destination: Hashable, Codable {
-        case search(String)
         case favorites
         case history
         case settings
@@ -24,7 +29,7 @@ struct HomeView: View {
                         .foregroundStyle(DS.Color.deepSlateBlue)
 
                     SearchBar(text: $query) {
-                        path.append(.search(query))
+                        runTextSearch()
                     }
 
                     HStack(spacing: DS.Spacing.lg) {
@@ -39,6 +44,10 @@ struct HomeView: View {
                         }
                     }
 
+                    if let e = errorMessage {
+                        Text(e).foregroundColor(.red)
+                    }
+
                     Spacer(minLength: 0)
                 }
                 .padding(.horizontal, DS.Spacing.xl)
@@ -51,17 +60,31 @@ struct HomeView: View {
                     onHistory: { path.append(.history) },
                     onSettings: { path.append(.settings) }
                 )
+
+                if isLoading {
+                    AnalysisOverlayView(onCancel: { isLoading = false })
+                }
             }
             .sheet(isPresented: $showCamera) {
-                CameraView { _ in }
+                CameraView { datas in
+                    showCamera = false
+                    currentImages = datas.compactMap { UIImage(data: $0) }
+                    currentImage = currentImages.first
+                    Task { await run(.images(datas)) }
+                }
             }
             .sheet(isPresented: $showBarcode) {
-                BarcodeScanView { _ in showBarcode = false }
+                BarcodeScanView { code in
+                    showBarcode = false
+                    currentImage = nil
+                    Task { await run(.barcode(code)) }
+                }
+            }
+            .sheet(item: $result) { r in
+                ResultView(result: r, image: currentImage)
             }
             .navigationDestination(for: Destination.self) { dest in
                 switch dest {
-                case .search:
-                    SearchView()
                 case .favorites:
                     FavoritesView()
                 case .history:
@@ -70,6 +93,27 @@ struct HomeView: View {
                     SettingsView()
                 }
             }
+        }
+    }
+
+    private func runTextSearch() {
+        currentImage = nil
+        Task { await run(.text(query)) }
+    }
+
+    private func run(_ input: FoodSearchRouter.Input) async {
+        guard UserDefaults.standard.foodSearchEnabled else {
+            self.errorMessage = "Food Search ei ole päällä (Asetukset → Food Search)."
+            return
+        }
+        errorMessage = nil
+        isLoading = true
+        defer { isLoading = false }
+        do {
+            let stage = try await FoodSearchRouter.shared.run(input)
+            self.result = stage
+        } catch {
+            self.errorMessage = error.localizedDescription
         }
     }
 }

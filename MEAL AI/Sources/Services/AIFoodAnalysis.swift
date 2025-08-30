@@ -2,21 +2,21 @@
 import Foundation
 
 protocol AIProviderService {
-    func analyze(prompt: String, imageData: Data?) async throws -> AIFoodAnalysisResult
+    func analyze(prompt: String, imageData: [Data]?) async throws -> AIFoodAnalysisResult
 }
 
 final class OpenAIProviderService: AIProviderService {
     static let shared = OpenAIProviderService()
     private init() {}
 
-    func analyze(prompt: String, imageData: Data?) async throws -> AIFoodAnalysisResult {
+    func analyze(prompt: String, imageData: [Data]?) async throws -> AIFoodAnalysisResult {
         guard let key = KeychainHelper.shared.get("openai_api_key"), !key.isEmpty else {
             throw NSError(domain: "OpenAI", code: -10, userInfo: [NSLocalizedDescriptionKey: "OpenAI key missing"])
         }
         let api = OpenAIAPI(apiKey: key)
         let sys = "You are a nutrition assistant. Reply strictly as JSON with keys: mealName, mealDescription, calories, carbohydrates, protein, fat, fiber, portionDescription, diabetesNotes."
         let raw = try await api.sendChat(model: .gpt4oMini, systemPrompt: sys, userPrompt: prompt,
-                                         imageData: imageData, temperature: 0.0, maxCompletionTokens: 600, forceJSON: true)
+                                         imageDatas: imageData, temperature: 0.0, maxCompletionTokens: 600, forceJSON: true)
         let cleaned = JSONTools.sanitizeJSON(raw)
         if let parsed: AIFoodAnalysisResult = JSONTools.decode(AIFoodAnalysisResult.self, from: cleaned) {
             return parsed
@@ -49,11 +49,11 @@ final class AIFoodAnalysis {
         return try await provider.analyze(prompt: prompt, imageData: nil)
     }
 
-    func analyze(imageData: Data) async throws -> AIFoodAnalysisResult {
+    func analyze(imageDatas: [Data]) async throws -> AIFoodAnalysisResult {
         let prompt = """
-        Inspect the photo and estimate macronutrients (g) and other context for the pictured portion.
+        Inspect the photos and estimate macronutrients (g) and other context for the pictured portion.
         Output strict JSON: mealName, mealDescription, calories, carbohydrates, protein, fat, fiber, portionDescription, diabetesNotes.
         """
-        return try await provider.analyze(prompt: prompt, imageData: imageData)
+        return try await provider.analyze(prompt: prompt, imageData: imageDatas)
     }
 }

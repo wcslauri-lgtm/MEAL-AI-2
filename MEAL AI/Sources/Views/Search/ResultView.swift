@@ -22,11 +22,45 @@ struct ResultView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text(result.mealName ?? "Tulos").font(.title2.bold())
+            if let desc = result.mealDescription { Text(desc).font(.subheadline) }
+
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 12) {
+                    macroPill(title: "Carbs", value: Int(result.analysis.carbs_g.rounded()), unit: "g")
+                    if let cal = result.analysis.calories_kcal {
+                        macroPill(title: "Calories", value: Int(cal.rounded()), unit: "cal")
+                    }
+                    macroPill(title: "Fat", value: Int(result.analysis.fat_g.rounded()), unit: "g")
+                    if let fiber = result.analysis.fiber_g {
+                        macroPill(title: "Fiber", value: Int(fiber.rounded()), unit: "g")
+                    }
+                    macroPill(title: "Protein", value: Int(result.analysis.protein_g.rounded()), unit: "g")
+                }
+            }
 
             HStack(spacing: 16) {
                 macroEditor("Carbs", $carbs)
                 macroEditor("Protein", $protein)
                 macroEditor("Fat", $fat)
+            }
+
+            if let portion = result.portionDescription {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Portions & Servings").font(.headline)
+                    Text(portion)
+                }
+                .padding()
+                .background(Color(.secondarySystemBackground))
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+            }
+            if let notes = result.diabetesNotes {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Diabetes Notes").font(.headline)
+                    Text(notes)
+                }
+                .padding()
+                .background(Color(.secondarySystemBackground))
+                .clipShape(RoundedRectangle(cornerRadius: 12))
             }
 
             HStack {
@@ -65,8 +99,14 @@ struct ResultView: View {
     private var editedResult: StageMealResult {
         let totals = NutritionTotals(carbs_g: Double(carbs),
                                     protein_g: Double(protein),
-                                    fat_g: Double(fat))
-        return StageMealResult(mealName: result.mealName, analysis: totals)
+                                    fat_g: Double(fat),
+                                    calories_kcal: result.analysis.calories_kcal,
+                                    fiber_g: result.analysis.fiber_g)
+        return StageMealResult(mealName: result.mealName,
+                               mealDescription: result.mealDescription,
+                               portionDescription: result.portionDescription,
+                               diabetesNotes: result.diabetesNotes,
+                               analysis: totals)
     }
 
     private func macroEditor(_ title: String, _ value: Binding<Int>) -> some View {
@@ -82,6 +122,16 @@ struct ResultView: View {
         .padding()
         .background(Color(.secondarySystemBackground))
         .clipShape(RoundedRectangle(cornerRadius: 12))
+    }
+
+    private func macroPill(title: String, value: Int, unit: String) -> some View {
+        VStack {
+            Text("\(value) \(unit)").font(.headline)
+            Text(title).font(.caption2)
+        }
+        .padding(8)
+        .background(Color(.secondarySystemBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 8))
     }
 }
 

@@ -27,9 +27,17 @@ final class FoodSearchRouter {
         let totals = NutritionTotals(
             carbs_g: ai.carbohydrates ?? base?.carbs ?? 0,
             protein_g: ai.protein ?? base?.protein ?? 0,
-            fat_g: ai.fat ?? base?.fat ?? 0
+            fat_g: ai.fat ?? base?.fat ?? 0,
+            calories_kcal: ai.calories,
+            fiber_g: ai.fiber
         )
         let name = ai.mealName ?? base?.name
-        return StageMealResult(mealName: name, analysis: totals)
+        return StageMealResult(
+            mealName: name,
+            mealDescription: ai.mealDescription,
+            portionDescription: ai.portionDescription,
+            diabetesNotes: ai.diabetesNotes,
+            analysis: totals
+        )
     }
 }

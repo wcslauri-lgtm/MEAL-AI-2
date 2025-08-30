@@ -1,12 +1,12 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State private var path = NavigationPath()
+    @State private var path: [Destination] = []
     @State private var query = ""
     @State private var showCamera = false
     @State private var showBarcode = false
 
-    private enum Destination: Hashable {
+    private enum Destination: Hashable, Codable {
         case search(String)
         case favorites
         case history

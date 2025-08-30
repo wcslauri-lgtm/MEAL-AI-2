@@ -5,11 +5,11 @@ final class FoodSearchRouter {
     static let shared = FoodSearchRouter()
     private init() {}
 
-    enum Input { case text(String); case voice(String); case barcode(String); case images([Data]) }
+    enum Input { case text(String); case barcode(String); case images([Data]) }
 
     func run(_ input: Input) async throws -> StageMealResult {
         switch input {
-        case .text(let q), .voice(let q):
+        case .text(let q):
             let base = try await USDAService.shared.fetchFood(query: q)
             let ai   = try await AIFoodAnalysis.shared.analyze(baseInfo: base, query: q)
             return map(base: base, ai: ai)

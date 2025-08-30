@@ -33,11 +33,6 @@ extension UserDefaults {
         set { set(newValue, forKey: "useVisionCamera") }
     }
 
-    var voiceSearchEnabled: Bool {
-        get { bool(forKey: "voiceSearchEnabled") }
-        set { set(newValue, forKey: "voiceSearchEnabled") }
-    }
-
     var usdaApiKey: String? {
         get { string(forKey: "usdaApiKey") }
         set { set(newValue, forKey: "usdaApiKey") }

@@ -4,7 +4,7 @@ import UIKit
 struct HomeView: View {
     @State private var path: [Destination] = []
     @State private var query = ""
-    @State private var showImagePicker = false
+    @State private var showCamera = false
     @State private var showBarcode = false
     @State private var isLoading = false
     @State private var errorMessage: String?
@@ -34,7 +34,7 @@ struct HomeView: View {
 
                     HStack(spacing: DS.Spacing.lg.rawValue) {
                         QuickActionCard(title: "Identify", systemImage: "camera.viewfinder") {
-                            showImagePicker = true
+                            showCamera = true
                         }
                         QuickActionCard(title: "History", systemImage: "list.bullet.rectangle") {
                             path.append(.history)
@@ -58,7 +58,7 @@ struct HomeView: View {
                 TabBarWithFab(
                     onBarcode: { showBarcode = true },
                     onFavorites: { path.append(.favorites) },
-                    onCamera: { showImagePicker = true },
+                    onCamera: { showCamera = true },
                     onHistory: { path.append(.history) },
                     onSettings: { path.append(.settings) }
                 )
@@ -67,13 +67,15 @@ struct HomeView: View {
                     AnalysisOverlayView(onCancel: { isLoading = false })
                 }
             }
-            .sheet(isPresented: $showImagePicker) {
-                ImagePickerView { datas in
-                    showImagePicker = false
+            .fullScreenCover(isPresented: $showCamera) {
+                CameraPickerView(onImagesPicked: { datas in
+                    showCamera = false
                     currentImages = datas.compactMap { UIImage(data: $0) }
                     currentImage = currentImages.first
                     Task { await run(.images(datas)) }
-                }
+                }, onCancel: {
+                    showCamera = false
+                })
             }
             .sheet(isPresented: $showBarcode) {
                 BarcodeScanView { code in

@@ -11,6 +11,7 @@ struct SearchView: View {
     @State private var errorMessage: String?
     @State private var result: StageMealResult?
     @State private var currentImage: UIImage?
+    @State private var currentImages: [UIImage] = []
 
     @ObservedObject private var favs = FavoritesStore.shared
 
@@ -34,6 +35,7 @@ struct SearchView: View {
                 Button {
                     showingCamera = true
                     currentImage = nil
+                    currentImages = []
                 } label: {
                     Label("Kamera", systemImage: "camera")
                 }.buttonStyle(.bordered)
@@ -71,10 +73,11 @@ struct SearchView: View {
             }
         }
         .sheet(isPresented: $showingCamera) {
-            CameraView { data in
+            CameraView { datas in
                 showingCamera = false
-                currentImage = UIImage(data: data)
-                Task { await run(.image(data)) }
+                currentImages = datas.compactMap { UIImage(data: $0) }
+                currentImage = currentImages.first
+                Task { await run(.images(datas)) }
             }
         }
         .sheet(item: $result) { r in ResultView(result: r, image: currentImage) }

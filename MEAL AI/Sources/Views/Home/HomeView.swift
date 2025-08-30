@@ -98,11 +98,13 @@ struct HomeView: View {
         }
     }
 
+    @MainActor
     private func runTextSearch() {
         currentImage = nil
         Task { await run(.text(query)) }
     }
 
+    @MainActor
     private func run(_ input: FoodSearchRouter.Input) async {
         guard UserDefaults.standard.foodSearchEnabled else {
             self.errorMessage = "Food Search ei ole päällä (Asetukset → Food Search)."

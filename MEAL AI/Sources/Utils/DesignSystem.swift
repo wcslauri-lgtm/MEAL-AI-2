@@ -183,11 +183,3 @@ extension Color {
     })
   }
 }
-
-// UIKit-käyttöön tarvittaessa
-extension UIColor {
-  convenience init(_ color: Color) {
-    let ui = UIColor(color)
-    self.init(cgColor: ui.cgColor)
-  }
-}

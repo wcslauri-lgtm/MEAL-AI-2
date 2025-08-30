@@ -173,10 +173,15 @@
 				LastSwiftUpdateCheck = 1640;
 				LastUpgradeCheck = 1640;
 				TargetAttributes = {
-					F1C408382E6246D000E6DA6C = {
-						CreatedOnToolsVersion = 16.4;
-					};
-					F1C408452E6246D200E6DA6C = {
+                                       F1C408382E6246D000E6DA6C = {
+                                               CreatedOnToolsVersion = 16.4;
+                                               SystemCapabilities = {
+                                                       com.apple.ApplicationGroups.iOS = {
+                                                               enabled = 1;
+                                                       };
+                                               };
+                                       };
+                                       F1C408452E6246D200E6DA6C = {
 						CreatedOnToolsVersion = 16.4;
 						TestTargetID = F1C408382E6246D000E6DA6C;
 					};
@@ -394,9 +399,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+                               ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+                               CODE_SIGN_STYLE = Automatic;
+                               CODE_SIGN_ENTITLEMENTS = "MEAL AI/MEAL AI.entitlements";
+                               CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = V2P3XJ8233;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -425,9 +431,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+                               ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+                               CODE_SIGN_STYLE = Automatic;
+                               CODE_SIGN_ENTITLEMENTS = "MEAL AI/MEAL AI.entitlements";
+                               CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = V2P3XJ8233;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;

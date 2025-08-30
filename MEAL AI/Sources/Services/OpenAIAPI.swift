@@ -20,7 +20,7 @@ final class OpenAIAPI {
         model: OpenAIModel,
         systemPrompt: String,
         userPrompt: String,
-        imageDatas: [Data]? = nil,
+        imageData: Data? = nil,
         temperature: Double = 0.0,
         maxCompletionTokens: Int = 600,
         forceJSON: Bool = true
@@ -31,14 +31,12 @@ final class OpenAIAPI {
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
         var messages: [[String: Any]] = [["role": "system", "content": systemPrompt]]
-        if let imageDatas = imageDatas, !imageDatas.isEmpty {
-            var content: [[String: Any]] = [["type": "text", "text": userPrompt]]
-            for data in imageDatas {
-                let base64 = data.base64EncodedString()
-                let part: [String: Any] = ["type": "image_url",
-                                           "image_url": ["url": "data:image/jpeg;base64,\(base64)"]]
-                content.append(part)
-            }
+        if let imageData = imageData {
+            let base64 = imageData.base64EncodedString()
+            let content: [[String: Any]] = [
+                ["type": "text", "text": userPrompt],
+                ["type": "image_url", "image_url": ["url": "data:image/jpeg;base64,\(base64)"]]
+            ]
             messages.append(["role": "user", "content": content])
         } else {
             messages.append(["role": "user", "content": userPrompt])

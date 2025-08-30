@@ -5,7 +5,7 @@ final class FoodSearchRouter {
     static let shared = FoodSearchRouter()
     private init() {}
 
-    enum Input { case text(String); case voice(String); case barcode(String); case images([Data]) }
+    enum Input { case text(String); case voice(String); case barcode(String); case image(Data) }
 
     func run(_ input: Input) async throws -> StageMealResult {
         switch input {
@@ -17,8 +17,8 @@ final class FoodSearchRouter {
             let off  = try await OpenFoodFactsService.shared.fetchProduct(barcode: code)
             let ai   = try await AIFoodAnalysis.shared.analyze(baseInfo: off, query: off.name)
             return map(base: off, ai: ai)
-        case .images(let data):
-            let ai = try await AIFoodAnalysis.shared.analyze(imageDatas: data)
+        case .image(let data):
+            let ai = try await AIFoodAnalysis.shared.analyze(imageData: data)
             return map(base: nil, ai: ai)
         }
     }

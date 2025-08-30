@@ -2,20 +2,18 @@ import SwiftUI
 import PhotosUI
 
 struct CameraView: View {
-    var onImagesPicked: ([Data]) -> Void
+    var onImagePicked: (Data) -> Void
     @Environment(\.dismiss) private var dismiss
-    @State private var pickerItems: [PhotosPickerItem] = []
-    @State private var previews: [UIImage] = []
+    @State private var pickerItem: PhotosPickerItem? = nil
+    @State private var preview: UIImage? = nil
     @State private var showCamera = false
-    private let maxPhotos = 3
 
     var body: some View {
         NavigationStack {
             VStack {
                 HStack {
                     PhotosPicker(
-                        selection: $pickerItems,
-                        maxSelectionCount: maxPhotos - previews.count,
+                        selection: $pickerItem,
                         matching: .images
                     ) {
                         VStack {
@@ -25,16 +23,14 @@ struct CameraView: View {
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
-                    .disabled(previews.count >= maxPhotos)
-                    .onChange(of: pickerItems) { newItems in
+                    .onChange(of: pickerItem) { newItem in
                         Task {
-                            for item in newItems {
-                                if let data = try? await item.loadTransferable(type: Data.self),
-                                   let img = UIImage(data: data) {
-                                    previews.append(img)
-                                }
+                            if let item = newItem,
+                               let data = try? await item.loadTransferable(type: Data.self),
+                               let img = UIImage(data: data) {
+                                preview = img
                             }
-                            pickerItems = []
+                            pickerItem = nil
                         }
                     }
 
@@ -48,40 +44,34 @@ struct CameraView: View {
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
-                    .disabled(previews.count >= maxPhotos)
                     .sheet(isPresented: $showCamera) {
                         ImagePicker(sourceType: .camera) { image in
                             if let image = image {
-                                previews.append(image)
+                                preview = image
                             }
                         }
                     }
                 }
                 .frame(height: 120)
 
-                HStack {
-                    ForEach(0..<maxPhotos, id: \.self) { idx in
-                        if idx < previews.count {
-                            Image(uiImage: previews[idx])
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 60, height: 60)
-                                .clipped()
-                        } else {
-                            Rectangle()
-                                .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [4]))
-                                .frame(width: 60, height: 60)
-                        }
-                    }
+                if let preview = preview {
+                    Image(uiImage: preview)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxHeight: 200)
+                } else {
+                    Rectangle()
+                        .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [4]))
+                        .frame(width: 200, height: 200)
                 }
-                .padding(.vertical, 8)
 
                 Button("Done") {
-                    let datas = previews.compactMap { $0.jpegData(compressionQuality: 0.8) }
-                    onImagesPicked(datas)
+                    if let data = preview?.jpegData(compressionQuality: 0.8) {
+                        onImagePicked(data)
+                    }
                     dismiss()
                 }
-                .disabled(previews.isEmpty)
+                .disabled(preview == nil)
                 .padding(.bottom)
             }
             .padding()

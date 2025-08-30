@@ -21,18 +21,18 @@ struct HomeView: View {
     var body: some View {
         NavigationStack(path: $path) {
             ZStack(alignment: .bottom) {
-                DS.Color.softCream.ignoresSafeArea()
+                DSColor.background.ignoresSafeArea()
 
-                VStack(alignment: .leading, spacing: DS.Spacing.xl) {
+                VStack(alignment: .leading, spacing: DS.Spacing.xl.rawValue) {
                     Text("MEAL-AI")
-                        .font(.largeTitle.bold())
-                        .foregroundStyle(DS.Color.deepSlateBlue)
+                        .font(DSTypography.largeTitle)
+                        .foregroundStyle(DSColor.textPrimary)
 
                     SearchBar(text: $query) {
                         runTextSearch()
                     }
 
-                    HStack(spacing: DS.Spacing.lg) {
+                    HStack(spacing: DS.Spacing.lg.rawValue) {
                         QuickActionCard(title: "Identify", systemImage: "camera.viewfinder") {
                             showCamera = true
                         }
@@ -45,13 +45,15 @@ struct HomeView: View {
                     }
 
                     if let e = errorMessage {
-                        Text(e).foregroundColor(.red)
+                        Text(e)
+                            .font(DSTypography.caption)
+                            .foregroundStyle(DSColor.error)
                     }
 
                     Spacer(minLength: 0)
                 }
-                .padding(.horizontal, DS.Spacing.xl)
-                .padding(.top, DS.Spacing.xl)
+                .padding(.horizontal, DS.Spacing.xl.rawValue)
+                .padding(.top, DS.Spacing.xl.rawValue)
 
                 TabBarWithFab(
                     onBarcode: { showBarcode = true },
@@ -123,20 +125,20 @@ struct SearchBar: View {
     var onSubmit: () -> Void
 
     var body: some View {
-        HStack(spacing: DS.Spacing.sm) {
+        HStack(spacing: DS.Spacing.sm.rawValue) {
             Image(systemName: "magnifyingglass")
-                .foregroundStyle(DS.Color.deepSlateBlue)
+                .foregroundStyle(DSColor.textPrimary)
             TextField("Search food", text: $text, onCommit: onSubmit)
                 .textInputAutocapitalization(.never)
                 .disableAutocorrection(true)
-                .foregroundStyle(DS.Color.deepSlateBlue)
+                .foregroundStyle(DSColor.textPrimary)
         }
-        .padding(.vertical, DS.Spacing.sm)
-        .padding(.horizontal, DS.Spacing.lg)
-        .background(DS.Color.honeyBeige)
-        .clipShape(RoundedRectangle(cornerRadius: DS.Radius.pill, style: .continuous))
+        .padding(.vertical, DS.Spacing.sm.rawValue)
+        .padding(.horizontal, DS.Spacing.lg.rawValue)
+        .background(DSColor.surface)
+        .clipShape(RoundedRectangle(cornerRadius: DS.Radius.pill.rawValue, style: .continuous))
         .overlay(
-            RoundedRectangle(cornerRadius: DS.Radius.pill).stroke(.black.opacity(0.05))
+            RoundedRectangle(cornerRadius: DS.Radius.pill.rawValue).stroke(DSColor.stroke)
         )
         .accessibilityLabel("Search food")
     }
@@ -149,18 +151,18 @@ struct QuickActionCard: View {
 
     var body: some View {
         Button(action: action) {
-            VStack(spacing: DS.Spacing.sm) {
+            VStack(spacing: DS.Spacing.sm.rawValue) {
                 Image(systemName: systemImage)
                     .font(.system(size: 24, weight: .semibold))
-                    .foregroundStyle(DS.Color.deepForestGreen)
+                    .foregroundStyle(Palette.deepForestGreen)
                 Text(title)
-                    .font(.body.weight(.semibold))
-                    .foregroundStyle(DS.Color.deepSlateBlue)
+                    .font(DSTypography.body.weight(.semibold))
+                    .foregroundStyle(DSColor.textPrimary)
             }
             .frame(maxWidth: .infinity, minHeight: 96)
-            .background(DS.Color.honeyBeige)
-            .clipShape(RoundedRectangle(cornerRadius: DS.Radius.lg, style: .continuous))
-            .shadow(color: .black.opacity(0.06), radius: 6, y: 3)
+            .background(DSColor.surface)
+            .clipShape(RoundedRectangle(cornerRadius: DS.Radius.lg.rawValue, style: .continuous))
+            .shadow(DS.Elevation.card)
         }
         .buttonStyle(.plain)
         .accessibilityElement(children: .ignore)
@@ -176,9 +178,9 @@ struct FabButton: View {
                 .font(.system(size: 22, weight: .bold))
                 .foregroundStyle(.white)
                 .padding(20)
-                .background(DS.Color.rubyRed)
+                .background(DSColor.primary)
                 .clipShape(Circle())
-                .shadow(color: .black.opacity(0.15), radius: 8, y: 6)
+                .shadow(DS.Elevation.fab)
         }
         .accessibilityLabel("Capture with camera")
     }
@@ -193,10 +195,10 @@ struct TabBarWithFab: View {
 
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 28, style: .continuous)
-                .fill(DS.Color.honeyBeige)
+            RoundedRectangle(cornerRadius: DS.Radius.pill.rawValue, style: .continuous)
+                .fill(DSColor.surface)
                 .frame(height: 74)
-                .shadow(color: .black.opacity(0.08), radius: 10, y: -2)
+                .shadow(color: DS.Elevation.card.color, radius: DS.Elevation.card.radius, y: -2)
                 .overlay(
                     HStack {
                         IconButton("barcode.viewfinder", action: onBarcode)
@@ -205,13 +207,13 @@ struct TabBarWithFab: View {
                         IconButton("list.bullet.rectangle", action: onHistory)
                         IconButton("gearshape", action: onSettings)
                     }
-                    .padding(.horizontal, DS.Spacing.xl)
+                    .padding(.horizontal, DS.Spacing.xl.rawValue)
                 )
             FabButton(action: onCamera)
                 .offset(y: -28)
         }
-        .padding(.horizontal, DS.Spacing.lg)
-        .padding(.bottom, DS.Spacing.md)
+        .padding(.horizontal, DS.Spacing.lg.rawValue)
+        .padding(.bottom, DS.Spacing.md.rawValue)
     }
 
     @ViewBuilder
@@ -219,7 +221,7 @@ struct TabBarWithFab: View {
         Button(action: action) {
             Image(systemName: name)
                 .font(.system(size: 20, weight: .semibold))
-                .foregroundStyle(DS.Color.deepSlateBlue)
+                .foregroundStyle(DSColor.textPrimary)
                 .frame(width: 36, height: 36)
         }
         .buttonStyle(.plain)

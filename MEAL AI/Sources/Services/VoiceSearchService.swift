@@ -29,6 +29,7 @@ final class VoiceSearchService: NSObject, ObservableObject {
             throw NSError(domain: "Voice", code: -1, userInfo: [NSLocalizedDescriptionKey: "Mic denied"])
         case .undetermined:
             let granted: Bool = await withCheckedContinuation { cont in
+                // Request microphone access using the iOS 17 AVAudioApplication API
                 AVAudioApplication.requestRecordPermission { ok in
                     cont.resume(returning: ok)
                 }

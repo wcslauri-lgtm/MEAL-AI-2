@@ -23,13 +23,13 @@ final class VoiceSearchService: NSObject, ObservableObject {
             if !granted { throw NSError(domain: "Voice", code: -2, userInfo: [NSLocalizedDescriptionKey: "Speech denied"]) }
         }
 
-        switch AVAudioSession.sharedInstance().recordPermission {
+        switch AVAudioApplication.shared.recordPermission {
         case .granted: break
         case .denied:
             throw NSError(domain: "Voice", code: -1, userInfo: [NSLocalizedDescriptionKey: "Mic denied"])
         case .undetermined:
             let granted: Bool = await withCheckedContinuation { cont in
-                AVAudioSession.sharedInstance().requestRecordPermission { ok in
+                AVAudioApplication.shared.requestRecordPermission { ok in
                     cont.resume(returning: ok)
                 }
             }

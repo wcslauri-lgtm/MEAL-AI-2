@@ -36,16 +36,16 @@ struct SettingsView: View {
                 Section("API-avaimet") {
                     SecureField("OpenAI key (sk-…)", text: $openAIKey)
                         .textInputAutocapitalization(.never)
-                        .onChange(of: openAIKey) { v in KeychainHelper.shared.set(v, for: "openai_api_key") }
+                        .onChange(of: openAIKey) { _, v in KeychainHelper.shared.set(v, for: "openai_api_key") }
                     SecureField("Claude key (sk-ant-…)", text: $claudeKey)
                         .textInputAutocapitalization(.never)
-                        .onChange(of: claudeKey) { v in KeychainHelper.shared.set(v, for: "claude_api_key") }
+                        .onChange(of: claudeKey) { _, v in KeychainHelper.shared.set(v, for: "claude_api_key") }
                     SecureField("Gemini key", text: $geminiKey)
                         .textInputAutocapitalization(.never)
-                        .onChange(of: geminiKey) { v in KeychainHelper.shared.set(v, for: "gemini_api_key") }
+                        .onChange(of: geminiKey) { _, v in KeychainHelper.shared.set(v, for: "gemini_api_key") }
                     TextField("USDA API key (valinn.)", text: $usda)
                         .textInputAutocapitalization(.never)
-                        .onChange(of: usda) { v in UserDefaults.standard.usdaApiKey = v }
+                        .onChange(of: usda) { _, v in UserDefaults.standard.usdaApiKey = v }
                 }
 
                 Section {
@@ -73,7 +73,7 @@ struct SettingsView: View {
             } header: { Text("Kieli") }
         }
         .navigationTitle("Asetukset")
-        .onChange(of: provider) { v in UserDefaults.standard.selectedAIProvider = v }
+        .onChange(of: provider) { _, v in UserDefaults.standard.selectedAIProvider = v }
     }
 
     private func testOpenAI() async {
@@ -85,7 +85,7 @@ struct SettingsView: View {
         let api = OpenAIAPI(apiKey: key)
         do {
             _ = try await api.sendChat(model: .gpt4oMini, systemPrompt: "healthcheck", userPrompt: "ping",
-                                       imageData: nil, temperature: 0.0, maxCompletionTokens: 5, forceJSON: false)
+                                       imageDatas: nil, temperature: 0.0, maxCompletionTokens: 5, forceJSON: false)
             testResult = "OK ✅"
         } catch {
             testResult = "Virhe: \(error.localizedDescription)"

@@ -19,7 +19,7 @@ struct AnalysisOverlayView: View {
                 ForEach(steps.indices, id: \.self) { idx in
                     HStack {
                         Image(systemName: idx < step ? "checkmark.circle.fill" : "circle")
-                            .foregroundColor(idx < step ? .green : .secondary)
+                            .foregroundStyle(idx < step ? DSColor.success : DSColor.textSecondary)
                         Text(steps[idx]).font(.footnote)
                     }
                 }
